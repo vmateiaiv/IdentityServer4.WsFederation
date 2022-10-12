@@ -1,6 +1,7 @@
 ﻿using IdentityModel;
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 using static IdentityServer4.IdentityServerConstants;
 
 namespace IdentityServer4.WsFederation
@@ -12,7 +13,10 @@ namespace IdentityServer4.WsFederation
             return new[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResource("profile", new[] { JwtClaimTypes.Name, JwtClaimTypes.Email })
+                new IdentityResource("profile", new[]
+                {
+                    JwtClaimTypes.Name, JwtClaimTypes.Email, ClaimTypes.Role, JwtClaimTypes.Role, "vo_doelgroepcode"
+                })
             };
         }
 
@@ -34,8 +38,8 @@ namespace IdentityServer4.WsFederation
                     ClientId = "urn:owinrp",
                     ProtocolType = ProtocolTypes.WsFederation,
 
-                    RedirectUris = { "http://localhost:10313/" },
-                    FrontChannelLogoutUri = "http://localhost:10313/home/signoutcleanup",
+                    RedirectUris = { "https://localhost:44313/" },
+                    FrontChannelLogoutUri = "https://localhost:44313/home/signoutcleanup",
                     IdentityTokenLifetime = 36000,
 
                     AllowedScopes = { "openid", "profile" }
@@ -49,6 +53,17 @@ namespace IdentityServer4.WsFederation
                     FrontChannelLogoutUri = "http://localhost:10314/account/signoutcleanup",
                     IdentityTokenLifetime = 36000,
 
+                    AllowedScopes = { "openid", "profile" }
+                },
+                new Client
+                {
+                    ClientId = "urn:informatievlaanderen.be/klip/admin/dev",
+                    ProtocolType = ProtocolTypes.WsFederation,
+                    
+                    RedirectUris = {"https://admin.dev.klip.vlaanderen.be"},
+                    FrontChannelLogoutUri = "https://admin.dev.klip.vlaanderen.be/signoutcleanup",
+                    IdentityTokenLifetime = 36000,
+                    
                     AllowedScopes = { "openid", "profile" }
                 }
             };

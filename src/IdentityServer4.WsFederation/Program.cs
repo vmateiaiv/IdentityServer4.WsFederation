@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,8 @@ namespace IdentityServer4.WsFederation
     {
         public static void Main(string[] args)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            
             Console.Title = "IdentityServer4";
 
             Log.Logger = new LoggerConfiguration()
@@ -31,6 +34,14 @@ namespace IdentityServer4.WsFederation
         {
             return WebHost.CreateDefaultBuilder(args)
                     .UseStartup<Startup>()
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Any, 44378, listenOptions =>
+                        {
+                            listenOptions.UseHttps(X509.GetCertificate("563000a8114334cea10a21f16a423163362e5700"));
+                        });
+                    })
+                   // .UseUrls("https://localhost:44378")
                     .ConfigureLogging(builder =>
                     {
                         builder.ClearProviders();

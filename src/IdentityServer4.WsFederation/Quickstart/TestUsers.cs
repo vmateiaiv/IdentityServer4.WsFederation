@@ -11,6 +11,9 @@ namespace IdentityServer4.Quickstart.UI
 {
     public class TestUsers
     {
+        public const string KlipPlanAanvrager = "KLIP Planaanvrager";
+        public const string KlipAdmin = "KLIP Admin";
+        
         public static List<TestUser> Users = new List<TestUser>
         {
             new TestUser{SubjectId = "818727", Username = "alice", Password = "alice", 
@@ -22,7 +25,8 @@ namespace IdentityServer4.Quickstart.UI
                     new Claim(JwtClaimTypes.Email, "AliceSmith@email.com"),
                     new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                     new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
-                    new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'One Hacker Way', 'locality': 'Heidelberg', 'postal_code': 69118, 'country': 'Germany' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json)
+                    new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'One Hacker Way', 'locality': 'Heidelberg', 'postal_code': 69118, 'country': 'Germany' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                    new Claim(ClaimTypes.Role, KlipAdmin)
                 }
             },
             new TestUser{SubjectId = "88421113", Username = "bob", Password = "bob", 
@@ -35,7 +39,8 @@ namespace IdentityServer4.Quickstart.UI
                     new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                     new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
                     new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'One Hacker Way', 'locality': 'Heidelberg', 'postal_code': 69118, 'country': 'Germany' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
-                    new Claim("location", "somewhere")
+                    new Claim("location", "somewhere"),
+                    new Claim(ClaimTypes.Role, KlipPlanAanvrager)
                 }
             }
         };

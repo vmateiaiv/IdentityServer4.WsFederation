@@ -18,7 +18,7 @@ namespace MvcOwinWsFederation
 
             app.UseWsFederationAuthentication(new WsFederationAuthenticationOptions
             {
-                MetadataAddress = "http://localhost:5000/wsfederation",
+                MetadataAddress = "https://localhost:44378/wsfederation",
                 Wtrealm = "urn:owinrp",
 
                 SignInAsAuthenticationType = "Cookies"
