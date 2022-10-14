@@ -27,12 +27,12 @@ namespace IdentityServer4.WsFederation
                 .AddWsFederation();
 
             services.AddAuthentication()
-                .AddGoogle("Google", "Google", options =>
+                /*.AddGoogle("Google", "Google", options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.ClientId = "708996912208-9m4dkjb5hscn7cjrn5u0r4tbgkbj1fko.apps.googleusercontent.com";
                     options.ClientSecret = "wdfPY6t8H8cecgjlxud__4Gh";
-                })
+                })*/
                 .AddOpenIdConnect("ACM-IDM", "ACM-IDM", options =>
                 {
                     options.Authority = "https://authenticatie-ti.vlaanderen.be/op";

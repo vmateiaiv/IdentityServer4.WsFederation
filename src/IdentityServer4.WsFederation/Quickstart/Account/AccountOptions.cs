@@ -3,12 +3,13 @@
 
 
 using System;
+using System.Configuration;
 
 namespace IdentityServer4.Quickstart.UI
 {
     public class AccountOptions
     {
-        public static bool AllowLocalLogin = true;
+        public static bool AllowLocalLogin = Convert.ToBoolean(ConfigurationManager.AppSettings["AllowLocalLogin"]);
         public static bool AllowRememberLogin = true;
         public static TimeSpan RememberMeLoginDuration = TimeSpan.FromDays(30);
 
